@@ -38,10 +38,24 @@
                 </td>
                 <td>Ejercicios con números y estructuras IF</td>
             </tr>
-            <td>
+            <tr>
+                <td>
                     <a href="fechas.php">fechas.php</a>
                 </td>
                 <td>Ejercicios de fechas con la función date()</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="ejercicios.php">ejercicios.php</a>
+                </td>
+                <td>Ejercicios</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="for.php">for.php</a>
+                </td>
+                <td>Ejercicios con FOR</td>
+            </tr>
         </tbody>
     </table>
 </body>
