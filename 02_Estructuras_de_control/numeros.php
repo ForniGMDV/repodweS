@@ -4,131 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Números</title>
+
+    <!-- Mostrar errores en la web -->
+    <?php
+        error_reporting( E_ALL );
+        ini_set( "display_errors", 1 );    
+    ?>
+
 </head>
 <body>
-    <?php $texto = "hola mundo"; ?>
-
-    <h1><?php echo $texto?></h1>
 
     <?php
-    $numero = 8;
+    // Comprar números
 
-    
-    #Forma 1
+    $numero = 16134;
 
-    if($numero >= -10 and $numero < 0){
-        echo "<p>1 El número $numero esta en el primer rango</p>";
-    }
-    elseif($numero >= 0 and $numero <= 10){
-        echo "<p>1 El número $numero esta en el segundo rango</p>";
-    }
-    elseif($numero > 10 and $numero <= 20){
-        echo "<p>1 El número $numero esta en el tercer rango</p>";
-    }
-    else{
-        echo "<p>1 El número $numero no está en ningún rango</p>";
+    // Forma 1
+    if($numero > 0) {
+        echo "<p>El número $numero es mayor que cero</p>";
+    } elseif ($numero == 0) {
+        echo "<p>El número $numero es cero</p>";
+    } else {
+        echo "<p>El número $numero es menor que cero</p>";
     }
 
-    #Forma 2
+    // Forma 2
+    if ($numero > 0) echo "<p>El número $numero es mayor que cero</p>";
+    elseif ($numero == 0) echo "<p>El número $numero es cero</p>";
+    else echo "<p>El número $numero es menor que cero</p>";
 
-    if($numero >= -10 and $numero < 0) echo "<p>2 El número $numero esta en el primer rango</p>";
-    elseif($numero >= 0 and $numero <= 10) echo "<p>2 El número $numero esta en el segundo rango</p>";
-    elseif($numero > 10 and $numero <= 20) echo "<p>2 El número $numero esta en el tercer rango</p>";
-    else echo "<p>2 El número $numero no está en ningún rango</p>";
-
-    #Forma 3
-
-    if($numero >= -10 and $numero < 0) :
-        echo "<p>3 El número $numero esta en el primer rango</p>";
-    elseif($numero >= 0 and $numero <= 10):
-        echo "<p>3 El número $numero esta en el segundo rango</p>";
-    elseif($numero > 10 and $numero <=20):
-        echo "<p>3 El número $numero esta en el tercer rango</p>";
+    // Forma 3
+    if($numero > 0):
+        echo "<p>El número $numero es mayor que cero</p>";
+    elseif ($numero == 0):
+        echo "<p>El número $numero es cero</p>";
     else:
-        echo "<p>3 El número $numero no está en ningún rango</p>";
+        echo "<p>El número $numero es menor que cero</p>";
     endif;
 
+    ?>
 
-    $numero_aleatorio = rand(1,200); # [1,200] --> Es un rango cerrado
+    <?php
+    // Rangos [-10,0),[0,10],(10,20]
 
-    $numero_aleatorio_decimales = rand(10,100)/10;
+    $num = -2;
 
-    $digitos = 0;
+    // && o and para conjunción
 
-    /*  COMPROBAR DE TRES FORMAS DIFERENTES, CON LA ESTRUCTURA IF, SI EL NUMERO ALEATORIO TIENE 1,2 0 3 DÍGITOS */
+    // FORMA 1
+    if ($num >= -10 and $num < 0) {
+        echo "<p>EL número $num está en el rango [-10,0)</p>";
+    } elseif ($num >= 0 && $num <= 10) {
+        echo "<p>EL número $num está en el rango [0,10]</p>";
+    } elseif ($num > 10 && $num <= 20) {
+        echo "<p>EL número $num está en el rango (10,20]</p>";
+    } else {
+        echo "<p>EL número $num está fuera del rango</p>";
+    }
 
-    #Forma 1
+    // FORMA 2
+    if ($num >= -10 and $num < 0) echo "<p>EL número $num está en el rango [-10,0)</p>";
+    elseif ($num >= 0 && $num <= 10) echo "<p>EL número $num está en el rango [0,10]</p>";
+    elseif ($num > 10 && $num <= 20) echo "<p>EL número $num está en el rango (10,20]</p>";
+    else echo "<p>EL número $num está fuera del rango</p>";
 
-    if($numero_aleatorio > 0 and $numero_aleatorio <= 9){
+
+    // FORMA 3
+    if ($num >= -10 and $num < 0):
+        echo "<p>EL número $num está en el rango [-10,0)</p>";
+    elseif ($num >= 0 && $num <= 10):
+        echo "<p>EL número $num está en el rango [0,10]</p>";
+    elseif ($num > 10 && $num <= 20):
+        echo "<p>EL número $num está en el rango (10,20]</p>";
+    else:
+        echo "<p>EL número $num está fuera del rango</p>";
+    endif;
+
+    ?>
+
+    <?php 
+    
+    $num_alea = rand(1,200); # [1,200]
+    $num_alea_decimal = rand(10,100)/10; // Numero aleatorio con decimales
+
+    /* COMPROBAR DE TRES FORMAS DIFERENTES, CON LA ESTRUCTURA IF, SI EL NÚMERO ALEATORIO TIENE 1, 2 O 3 DÍGITOS */
+
+    $digitos = null;
+
+    // FORMA 1
+    if ($num_alea > 0 && $num_alea < 10) {
         $digitos = 1;
-    }
-    elseif($numero_aleatorio >= 10 and $numero_aleatorio < 100){
+    } elseif ($num_alea >= 10 and $num_alea < 100) {
         $digitos = 2;
-    }
-    elseif($numero_aleatorio >= 100 and $numero_aleatorio <=200){
+    } else {
         $digitos = 3;
     }
-    else{
-        $digitos = "ERROR";
-    }
 
-    echo "<p>1 El número aleatorio $numero_aleatorio tiene $digitos dígitos</p>";
+    // FORMA 2
+    if ($num_alea > 0 && $num_alea < 10) $digitos = 1;
+    elseif ($num_alea >= 10 and $num_alea < 100) $digitos = 2;
+    else $digitos = 3;
 
-    #Forma 2
-    
-    if($numero_aleatorio > 0 and $numero_aleatorio <= 9) echo "<p>2 El número aleatorio $numero_aleatorio tiene 1 dígito</p>";
-    elseif($numero_aleatorio >= 10 and $numero_aleatorio < 100) echo "<p>2 El número aleatorio $numero_aleatorio tiene 2 dígitos</p>";
-    else echo "<p>2 El número aleatorio $numero_aleatorio tiene 3 dígitos</p>";
-    
-    #Forma 3
-    
-    if($numero_aleatorio > 0 and $numero_aleatorio <= 9) :
-        echo "<p>3 El número aleatorio $numero_aleatorio tiene 1 dígito</p>";
-    elseif($numero_aleatorio >= 10 and $numero_aleatorio < 100):
-        echo "<p>3 El número aleatorio $numero_aleatorio tiene 2 dígitos</p>";
+    // FORMA 3
+    if ($num_alea > 0 && $num_alea < 10):
+        $digitos = 1; 
+    elseif ($num_alea >= 10 and $num_alea < 100):
+        $digitos = 2;
     else:
-        echo "<p>3 El número aleatorio $numero_aleatorio tiene 3 dígitos</p>";
+        $digitos = 3;
     endif;
+
+    $digitos_texto = "dígitos.";
+    if ($digitos == 1) $digitos_texto = "dígito.";
+    echo "<p>El número $num_alea tiene $digitos $digitos_texto</p>";
+
+    /* VERSION CON MATCH */
+    $resultado = match (true) {
+        $num_alea >= 1 && $num_alea <= 9 => 1,
+        $num_alea >= 10 && $num_alea <= 99 => 2,
+        $num_alea >= 100 && $num_alea <= 999 => 3,
+        default => "ERROR"
+    };
+
+    $digitos_texto = "dígitos.";
+    if ($digitos == 1) $digitos_texto = "dígito.";
+    echo "<p>El número $num_alea tiene $digitos $digitos_texto</p>";
+
     
-
-
-
-
-
-    /* #   Forma 1
-    if($numero > 0){
-        echo "<p>1 El número $numero es mayor que cero</p>";
-    }
-    elseif ($numero == 0){
-        echo "<p>1 El número $numero es igual que cero</p>";
-    }
-    else{
-        echo "<p>1 El número $numero es menor que cero</p>";
-    }
-
-    #   Forma 2
-    if ($numero > 0) echo "<p>2 El número $numero es mayor que cero</p>";
-    elseif($numero == 0) echo "<p>2 El número $numero es igual que cero</p>";
-    else echo "<p>2 El número $numero es menor que cero</p>";
-
-    #   Forma 3
-    if ($numero > 0):
-        echo "<p>3 El número $numero es mayor que cero</p>";
-    elseif ($numero == 0):
-        echo "<p>3 El número $numero es igual que cero</p>";
-    else:
-        echo "<p>3 El número $numero es menor que cero</p>";
-    endif; */
-
-    /* if($numero > 0) {
-        echo "<p>1 El número $numero es mayor que cero</p>";
-    }
-    if($numero < 0) echo "<p>2 El número $numero es menor que cero</p>";
-    
-    if($numero = 0): echo "<p>3 El número $numero es igual que 0</p>"; endif;
-    ?> */
+        
     ?>
-    
-    
+
+    <?php
+
+    $n = rand(1,3);
+
+    /* FORMA 1 */
+    switch($n) {
+        case 1:
+            echo "El número es $n";
+            break;
+        case 2:
+            echo "El número es $n";
+            break;
+        default:
+            echo "El número es $n";
+            break;
+    }
+
+    /* FORMA 2 */
+    $resultado = match($n) {
+        1 => "El numero es 1",
+        2 => "El numero es 2",
+        3 => "El numero es 3"
+    };
+
+    echo "<h3>$resultado</h3>";
+
+    ?>
+
+
+
 </body>
 </html>

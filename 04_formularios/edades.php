@@ -1,81 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edades</title>
-    <link rel="stylesheet" href="/Ejercicios/cssparaphp/estilo.css">
+    <!-- Mostrar errores en la web -->
+    <?php
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+    ?>
 </head>
 <body>
-    <!--
-        CREAR UN FORMULARIO QUE RECIBA EL NOMBRE Y LA EDAD DE UNA PERSONA
-
-        SI LA EDAD ES MENOR QUE 18, SE MOSTRARÁ EL NOMBRE Y QUE ES MENOR DE EDAD
-        
-        SI LA EDAD ESTÁ ENTRE 18 Y 65, SE MOSTRARÁ EL NOMBRE Y QUE ES MAYOR DE EDAD
-
-        SI LA EDAD ES MÁS DE 65, SE MOSTRARÁ EL NOMBRE Y QUE SE HA JUBILADO
-        
+    <!-- 
+    CREAR UN FORMULARIO QUE RECIBA EL NOMBRE Y LA EDAD DE UNA PERSONA
+    SI LA EDAD ES MENOR QUE 18, SE MOSTRARÁ EL NOMBRE
+    SI LA EDAD ESTÁ ENTRE 18 Y 65, SE MOSTRARÁ EL NOMBRE Y QUE ES MAYOR DE EDAD
+    SI LA EDAD ES MÁS DE 65, SE MOSTRARÁ EL NOMBRE Y QUE SE HA JUBILADO
     -->
+
+    <h3>Edades</h3>
+    <br>
     <form action="" method="post">
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre">
-        <label for="apellido">Apellido</label>
-        <input type="text" name="apellido">
-        <label for="edad">Edad</label>
-        <input type="text" name="edad">
-        <input type="submit" value="respuesta">
+        <label for="name">Nombre:      </label>
+        <input type="text" name="name" id="name" placeholder="Introduzca su nombre">
+        <br><br>
+        <label for="age">Edad: </label> 
+        <input type="text" name="age" id="age" placeholder="Introduzca su edad">
+        <br><br>
+        <input type="submit" value="Enviar">
     </form>
 
     <?php
+    $mostrar = "Nombre: ";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        
-        //$mensaje = $_POST["mensaje"];
-        $nombre = $_POST["nombre"];
-        $apellido = $_POST["apellido"];
-        $edad = $_POST["edad"];
+        $name = $_POST["name"];
+        $age = $_POST["age"];
 
-        if($edad < 18){
-            echo "<h3>$nombre es menor de edad</h3>";
+        if($age < 18){
+            $mostrar = "$mostrar" . "$name.";
+        } elseif($age >= 18 && $age <= 65){
+            $mostrar = "$mostrar" . "$name. " . "Edad: " . $age;
+        } else {
+            $mostrar = "$mostrar" . "$name. " . "Está jubilado";
         }
-        else if($edad >= 18 && $edad <= 65){
-            echo "<h3>$nombre es mayor de edad</h3>";
-        }
-        else if($edad > 65){
-            echo "<h3>$nombre se ha jubilado</h3>";
-        }     
+        echo "<br>";
+        echo $mostrar;
     }
-    
     ?>
 
-    <!--
-        CREAR UN FORMULARIO QUE RECIBA UN NÚMERO
-
-        SE MOSTRARÁ LA TABLA DE MULTIPLICAR DE ESE NUMERO EN UNA TABLA HTML
-    -->
-
-    <form action="" method="post">
-        <label for="numero">Numero</label>
-        <input type="text" name="numero">
-        <input type="submit" value="calcular">
-    </form>
-
-
-    <table>
-        <tbody>
-            <tr>
-            <?php
-                if($_SERVER["REQUEST_METHOD"] == "POST"){
-                    $numero = $_POST["numero"];
-                    for($i = 1;$i <= 10; $i++){
-                        $resultado = $numero*$i;
-                        echo "<tr><td>$resultado</td></tr>";
-                    }
-                }
-            ?>
-            </tr>
-        </tbody>
-    </table>
-    
 </body>
 </html>

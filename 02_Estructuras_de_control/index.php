@@ -1,34 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de contenidos</title>
-    <style>
-        table{
-            border-collapse: collapse;
-            width: 700px;
-        }
-        table th, table td{
-            text-align: center;
-            border: 3px solid deeppink;
-        }
-        a{
-            color: blue;
-            text-decoration: none;
-        }
-        a:hover{
-            text-decoration: underline;
-        }
-    </style>
+    <title>Indice</title>
+    <link rel="stylesheet" type="text/css" href="./css/estilos.css">
 </head>
 <body>
     <table>
-        <caption>Tabla de contenidos</caption>
+        <caption>Tabla de contenido</caption>
         <thead>
             <tr>
-                <th>Archivo</th>
-                <th>Descripción</th>
+                <th>
+                    Archivo
+                </th>
+                <th>
+                    Descripción
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -36,25 +24,33 @@
                 <td>
                     <a href="numeros.php">numeros.php</a>
                 </td>
-                <td>Ejercicios con números y estructuras IF</td>
+                <td>
+                    Ejercicios de comparaciones con números.
+                </td>
             </tr>
             <tr>
                 <td>
                     <a href="fechas.php">fechas.php</a>
                 </td>
-                <td>Ejercicios de fechas con la función date()</td>
+                <td>
+                    Ejercicios de fechas con la función date().
+                </td>
             </tr>
             <tr>
                 <td>
-                    <a href="ejercicios.php">ejercicios.php</a>
+                    <a href="ejercicio.php">ejercicio.php</a>
                 </td>
-                <td>Ejercicios</td>
+                <td>
+                    Ejercicios de fechas con la función date().
+                </td>
             </tr>
             <tr>
                 <td>
-                    <a href="for.php">for.php</a>
+                    <a href="bucles.php">bucles.php</a>
                 </td>
-                <td>Ejercicios con FOR</td>
+                <td>
+                    Ejercicios de bucles.
+                </td>
             </tr>
         </tbody>
     </table>
