@@ -4,83 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicios</title>
-    <style>
-        table{
-            border-collapse: collapse;
-            width: 700px;
-        }
-        table th, table td{
-            text-align: center;
-            border: 3px solid black;
-        }
-        .suspenso{
-            background-color: red;
-        }
-        .aprobado{
-            background-color: green;
-        }
-    </style>
+    <link href="estilos.css" rel="stylesheet" type="text/css">
     <?php
         error_reporting( E_ALL );
-        ini_set("display_errors", 1);
+        ini_set("display_errors", 1 );    
     ?>
 </head>
 <body>
-    <!--
-    
+    <!-- RECORDATORIO!!! EL VIERNES VEMOS CÓMO ORDENAR TABLAS -->
 
-    Desarrollo web en entorno servidor => Alejandra
-    Desarrollo web en entorno cliente => José Miguel
-    Diseño de interfaces web => José Miguel
-    Desplieges de aplicaciones => Jaime
-    Empresa e iniciativa emprenderora => Convalidado
-    Inglés => Virginia
+    <!--    EJERCICIO 1
+                
+            Desarrollo web en entorno servidor => Alejandra
+            Desarrollo web en entorno cliente => José Miguel
+            Diseño de interfaces web => José Miguel
+            Despliegue de aplicaciones => Jaime
+            Empresa e iniciativa emprendedora => Andrea
+            Inglés => Virginia
 
-    MOSTRARLO TODO EN UNA TABLA
+            MOSTRARLO TODO EN UNA TABLA
     -->
-
-<h1>Ejercicio 1</h1>
 
     <?php
-$asignaturas = [
-    "Desarrollo web en entorno servidor" => "Alejandra",
-    "Desarrollo web en entorno cliente" => "José Miguel",
-    "Diseño de interfaces web" => "José Miguel",
-    "Desplieges de aplicaciones" => "Jaime",
-    "Empresa e iniciativa emprenderora" => "Convalidado",
-    "Inglés" => "Virginia"
-];
+    $asignaturas = [
+        "Desarrollo web en entorno servidor" => "Alejandra",
+        "Desarrollo web en entorno cliente" => "José Miguel",
+        "Diseño de interfaces web" => "José Miguel",
+        "Despliegue de aplicaciones" => "Jaime",
+        "Empresa e iniciativa emprendedora" => "Andrea",
+        "Inglés" => "Virginia"
+    ];
+    ?>
 
-echo "<table>";
-echo "<tr><th>Asignatura</th><th>Profesor</th></tr>";
+    <table>
+        <thead>
+            <tr>
+                <th>Asignatura</th>
+                <th>Profesor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            krsort($asignaturas);
+            foreach($asignaturas as $asignatura => $profesor) {
+                echo "<tr>";
+                echo "<td>$asignatura</td>";
+                echo "<td>$profesor</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 
-foreach ($asignaturas as $asignatura => $profesor) {
-    echo "<tr>";
-    echo "<td>$asignatura</td>";
-    echo "<td>$profesor</td>";
-    echo "</tr>";
-}
+    <!--    EJERCICIO 2
+            
+            Francisco => 3
+            Daniel => 5
+            Aurora => 10
+            Luis => 7
+            Samuel => 9
 
-echo "</table>";
-?>
-    <!--
-    EJERCICIO 02
-
-    Francisco => 3
-    Daniel => 5
-    Aurora => 10
-    Luis => 7
-    samuel => 9
-
-    MOSTRAR EN UNA TABLA CON 3 COLUMNAS
-     - COLUMNA 1: ALUMNO
-     - COLUMNA 2: NOTA
-     - COLUMNA 3: SI NOTA < 5, SUSPENSO, ELSE, APROBADO
+            MOSTRAR EN UNA TABLA CON 3 COLUMNAS
+            - COLUMNA 1: ALUMNO
+            - COLUMNA 2: NOTA
+            - COLUMNA 3: SI NOTA < 5, SUSPENSO, ELSE, APROBADO
     -->
-<br>
-<br>
-
-<h1>Ejercicio 2</h1>
 
     <?php
     $estudiantes = [
@@ -92,9 +80,10 @@ echo "</table>";
         "Samuel" => 9,
         "Juanjo" => 2,
         "Vicente" => 1,
-    ]
+    ];
     ?>
 
+    <br><br><br>
     <table>
         <thead>
             <tr>
@@ -105,26 +94,96 @@ echo "</table>";
         </thead>
         <tbody>
             <?php
-                foreach ($estudiantes as $estudiante => $nota){ 
-                    if ($nota < 5) echo "<tr class = 'suspenso'>";
-                    else echo "<tr class='aprobado'>";
-                    ?>
-                        <td><?php echo $estudiante ?></td>
-                        <td><?php echo $nota ?></td>
-                        <td>
-                            <?php
-                                if($nota < 5) echo "Suspenso";
-                                else if ($nota >= 5  && $nota < 7) echo "Aprobado";
-                                else if ($nota >= 7 && $nota < 9) echo "Notable";
-                                else echo "Sobresaliente";
-                            ?>
-                        </td>
-                    </tr>
+                //if($nota < 5) echo "<tr class='suspenso'>";
+                //else echo "<tr class='aprobado'>";
+            foreach($estudiantes as $estudiante => $nota) { ?>
+                <tr class="<?php if($nota < 5) echo "suspenso"; else echo "aprobado"; ?>">
+                    <td><?php echo $estudiante ?></td>
+                    <td><?php echo $nota ?></td>
+                    <td>
+                        <?php
+                        if($nota < 5) echo "Suspenso";
+                        else echo "Aprobado";
+                        ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <br><br><br>
+    <?php
+    /**
+     * Insertar dos nuevos estudiantes, con notas aleatorias entre 0 y 10
+     * 
+     * Borrar un estudiante (el que peor os caiga) por la clave
+     * 
+     * Mostrar en una nueva tabla todo ordenado por los nombres en orden alfabeticamente
+     * inverso
+     * 
+     * Mostrar en una nueva tabla todo ordenado por la nota de 10 a 0 (orden inverso)
+     */
+
+    $estudiantes["Paula"] = rand(0,10);
+    $estudiantes["Waluis"] = rand(0,10);
+
+    unset($estudiantes["Vicente"]);
+
+    krsort($estudiantes);
+    ?>
+
+    <table>
+        <caption>Estudiantes ordenados por el nombre al revés</caption>
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Nota</th>
+                <th>Resultado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($estudiantes as $estudiante => $nota) { ?>
+                <tr class="<?php if($nota < 5) echo "suspenso"; else echo "aprobado"; ?>">
+                    <td><?php echo $estudiante ?></td>
+                    <td><?php echo $nota ?></td>
+                    <td>
+                        <?php
+                        if($nota < 5) echo "Suspenso";
+                        else echo "Aprobado";
+                        ?>
+                    </td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>
 
-    <?php
-    ?>
+    <br><br><br>
+
+    <table>
+        <caption>Estudiantes ordenados de menor a mayor nota</caption>
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Nota</th>
+                <th>Resultado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            arsort($estudiantes);
+            foreach($estudiantes as $estudiante => $nota) { ?>
+                <tr class="<?php if($nota < 5) echo "suspenso"; else echo "aprobado"; ?>">
+                    <td><?php echo $estudiante ?></td>
+                    <td><?php echo $nota ?></td>
+                    <td>
+                        <?php
+                        if($nota < 5) echo "Suspenso";
+                        else echo "Aprobado";
+                        ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </body>
 </html>

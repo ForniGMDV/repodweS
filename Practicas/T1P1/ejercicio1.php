@@ -1,87 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
-
+    <title>Ejercicio1</title>
+    <!-- Mostrar errores en la web -->
     <?php
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
     ?>
-
     <style>
-        table {
-    border: 2px solid rgb(172, 77, 196);
-    }
-
-    th, td {
-        border: 2px solid rgb(20, 194, 165);
-        padding: 10px;
-    }
-
-    caption {
-        border: 2px solid pink;
-    }
-
-    .suspenso {
-        background-color: rgb(207, 133, 133);
-        color: white;
-    }
-
-    .aprobado {
-        background-color: rgb(212, 247, 160);
-    }
+        table{
+            border-collapse: collapse;
+            width: 700px;
+        }
+        table th, table td{
+            text-align: center;
+            border: 3px solid black;
+        }
     </style>
-
 </head>
 <body>
     <?php
-    
+    // Ejercicio 1
     $animes = [
-        ["Dandadan", "Acción"],
+        ["Re:Zero", "Misterio"],
+        ["Kekkai Sensen", "Acción"],
         ["Frieren", "Fantasía"],
+        ["Jigokuraku", "Acción"],
     ];
 
-    
-    array_push($animes, ["Tragones y mazmorras", "Comedia"]);
-    array_push($animes, ["Los diarios de la boticaria", "Histórico"]);
+    // 1.1
 
-    unset($animes[0]);
-    $animes = array_values($animes);
+    array_push($animes,["Dandadan","Comedia"]);
+    array_push($animes,["Jujutsu Kaisen", "Acción"]);
+
+    // 1.2
+    // or alguna razón el apartado 1.2 me destruye el ejercicio entero, seguramente porque yo no esté borrando el anime como es debido
+    // unset($animes[0]);
+
+    // 1.3
 
     for($i = 0; $i < count($animes); $i++) {
 
-        $num_alea_anio = rand(1990,2030);
-        $num_alea_cap = rand(1,99);
+        $animes[$i][2] = rand(1990,2030);
 
-        $animes[$i][2] = $num_alea_anio;
-        $animes[$i][3] = $num_alea_cap;
-        $animes[$i][4] = "Ya disponible";
+        // 1.4
 
-        if ($animes[$i][2] > 2024) {
+        $animes[$i][3] = rand(1,99);
+
+        // 1.5
+
+        if($animes[$i][2] <= 2024){
+            $animes[$i][4] = "Ya disponible";
+        }
+        else{
             $animes[$i][4] = "Próximamente";
         }
-
     }
-
-    $_titulo = array_column($animes, 0);
-    $_genero = array_column($animes, 1);
-    $_anio = array_column($animes, 2);
-    $_capitulos = array_column($animes, 3);
-    $_disponibilidad = array_column($animes, 4);
-
-    array_multisort($_genero, SORT_ASC, 
-                    $_anio, SORT_ASC, 
-                    $_titulo, SORT_ASC, $animes);
 
     ?>
 
+    <!-- 1.6 y 1.7 -->
     <table>
-        <caption>Animes</caption>
         <thead>
+            <caption>Animes</caption>
             <tr>
-                <th>Título</th>
+                <th>Titulo</th>
                 <th>Género</th>
                 <th>Año</th>
                 <th>Episodios</th>
@@ -89,26 +75,60 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <?php
-
-                foreach($animes as $anime) {
-                    list($titulo, $genero, $anio, $capitulos, $dispo) = $anime; 
-                    echo "<tr>";
-                    echo "<td>$titulo</td>";
-                    echo "<td>$genero</td>";
-                    echo "<td>$anio</td>";
-                    echo "<td>$capitulos</td>";
-                    echo "<td>$dispo</td>";
-                    echo "</tr>";
-                }
-                ?>
-               
-            </tr>
+        <?php
+            foreach($animes as $anime) { 
+                // Descompone el array en varias variables, solamente dentro del foreach
+                list($titulo, $genero, $anio, $eps, $dispo) = $anime; ?>
+                <tr>
+                <td><?php echo $titulo ?></td>
+                <td><?php echo $genero ?></td>
+                <td><?php echo $anio ?></td>
+                <td><?php echo $eps ?></td>
+                <td><?php echo $dispo ?></td>
+                </tr>
+            <?php } ?>
         </tbody>
-
     </table>
+    <br><br><br>
 
+    <h2>Tabla ordenada</h2>
 
+    <?php
+    $_titulo = array_column($animes, 0);
+    $_genero = array_column($animes, 1);
+    $_anio = array_column($animes, 2);
+
+    array_multisort($_titulo, SORT_ASC, 
+                    $_genero, SORT_DESC, 
+                    $_anio, SORT_DESC, 
+                    $animes);
+    ?>
+
+    <table>
+        <thead>
+            <caption>Animes</caption>
+            <tr>
+                <th>Titulo</th>
+                <th>Genero</th>
+                <th>Año</th>
+                <th>Duración</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            foreach($animes as $anime) { 
+                // Descompone el array en varias variables, solamente dentro del foreach
+                list($titulo, $genero, $anio, $eps, $dispo) = $anime; ?>
+                <tr>
+                <td><?php echo $titulo ?></td>
+                <td><?php echo $genero ?></td>
+                <td><?php echo $anio ?></td>
+                <td><?php echo $eps ?></td>
+                <td><?php echo $dispo ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </body>
 </html>
