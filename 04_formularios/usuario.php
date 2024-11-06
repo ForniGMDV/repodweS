@@ -129,7 +129,7 @@
                         $err_nombre = "El nombre solo puede contener letras y espacios
                             en blanco";
                     } else {
-                        $nombre = $tmp_nombre;
+                        $nombre = ucwords(strtolower($tmp_nombre));
                     }
                 }
             }
@@ -221,11 +221,11 @@
         <?php
         if(isset($dni) && isset($correo) && isset($usuario) && isset($nombre)
                 && isset($fecha_nacimiento)) { ?>
-            <h1><?php echo $dni ?></h1>
-            <h1><?php echo $correo ?></h1>
-            <h1><?php echo $usuario ?></h1>
-            <h1><?php echo $nombre ?></h1>
-            <h1><?php echo $fecha_nacimiento ?></h1>
+            <p><?php echo $dni ?></p>
+            <p><?php echo $correo ?></p>
+            <p><?php echo $usuario ?></p>
+            <p><?php echo $nombre ?></p>
+            <p><?php echo $fecha_nacimiento ?></p>
         <?php } ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
